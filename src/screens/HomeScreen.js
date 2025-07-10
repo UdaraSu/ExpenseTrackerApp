@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Image
-        source={require('../assets/dashboard.png')} // Add a nice PNG/SVG image in assets
+        source={require('../assets/dashboard.png')}
         style={styles.image}
         resizeMode="contain"
       />
