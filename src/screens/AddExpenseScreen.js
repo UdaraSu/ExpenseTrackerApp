@@ -71,7 +71,7 @@ const AddExpenseScreen = () => {
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.header, { color: colors.text }]}>Add New Expense</Text>
+      <Text style={[styles.header, { color: colors.text }]}>Add Your New Expense</Text>
       <View style={[styles.card, { backgroundColor: colors.card }]}>
         <Text style={[styles.label, { color: colors.text }]}>Title</Text>
         {/* Title */}
