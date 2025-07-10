@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   chartCard: {
     marginHorizontal: 8,
     paddingVertical: 20,
-    paddingHorizontal: 12,
+    paddingHorizontal: 5,
     borderRadius: 24,
     shadowOpacity: 0.15,
     shadowRadius: 12,

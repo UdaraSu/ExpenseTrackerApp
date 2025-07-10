@@ -35,44 +35,52 @@ const ScreenSwitcher = () => {
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background, marginTop: 40 }]}>
       {screen !== 'home' && (
-  <View style={[styles.header, { backgroundColor: colors.card }]}>
-    {['add', 'list', 'chart'].map((item) => (
-      <TouchableOpacity
-        key={item}
-        style={[
-          styles.tabButton,
-          {
-            backgroundColor: screen === item ? colors.primary : colors.input,
-            borderColor: screen === item ? colors.primary : 'transparent',
-          },
-        ]}
-        onPress={() => setScreen(item)}
-        activeOpacity={0.7}
-      >
-        
-        <Text
-          style={[
-            styles.tabButtonText,
-            { color: screen === item ? '#1569BD' : colors.text },
-          ]}
-        >
-          {item.charAt(0).toUpperCase() + item.slice(1)}
-        </Text>
-      </TouchableOpacity>
-    ))}
+        <View style={[styles.header, { backgroundColor: colors.card }]}>
+          {/* Back Button */}
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => setScreen('home')}
+          >
+            <Text style={[styles.backIcon, { color: colors.text }]}>←</Text>
+          </TouchableOpacity>
 
-    <TouchableOpacity
-      style={[styles.themeButton, { backgroundColor: colors.primary }]}
-      onPress={toggleTheme}
-      activeOpacity={0.7}
-    >
-      <Text style={styles.themeButtonText}>
-        {dark ? '☀️ Light' : '🌙 Dark'}
-      </Text>
-    </TouchableOpacity>
-  </View>
-)}
+          {/* Tabs */}
+          {['add', 'list', 'chart'].map((item) => (
+            <TouchableOpacity
+              key={item}
+              style={[
+                styles.tabButton,
+                {
+                  backgroundColor: screen === item ? colors.primary : colors.input,
+                  borderColor: screen === item ? colors.primary : 'transparent',
+                },
+              ]}
+              onPress={() => setScreen(item)}
+              activeOpacity={0.7}
+            >
+              <Text
+                style={[
+                  styles.tabButtonText,
+                  { color: screen === item ? '#1569BD' : colors.text },
+                ]}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </Text>
+            </TouchableOpacity>
+          ))}
 
+          {/* Theme Toggle */}
+          <TouchableOpacity
+            style={[styles.themeButton, { backgroundColor: colors.primary }]}
+            onPress={toggleTheme}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.themeButtonText}>
+              {dark ? '☀️ Light' : '🌙 Dark'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {renderScreen()}
@@ -99,10 +107,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
   },
   backButton: {
-    padding: 10,
-    borderRadius: 50,
-    //borderWidth: 1,
-    marginRight: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    marginRight: 6,
   },
   backIcon: {
     fontSize: 22,
