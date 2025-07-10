@@ -1,5 +1,3 @@
-// 🧾 Modified ExpenseListScreen.js to support displaying receipt image
-
 import React, { useEffect, useState } from 'react';
 import {
   View,
