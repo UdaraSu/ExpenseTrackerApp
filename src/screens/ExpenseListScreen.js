@@ -1,5 +1,3 @@
-// 🧾 Modified ExpenseListScreen.js to support displaying receipt image
-
 import React, { useEffect, useState } from 'react';
 import {
   View,
@@ -80,6 +78,7 @@ const ExpenseListScreen = () => {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Text style={[styles.total, { color: colors.text }]}>Total: Rs. {total.toFixed(2)}</Text>
 
+      {/* filters */}
       <Text style={[styles.label, { color: colors.text }]}>Filter by Category</Text>
       <View style={[styles.pickerWrapper, { backgroundColor: colors.input, borderColor: colors.border }]}>
         <Picker
