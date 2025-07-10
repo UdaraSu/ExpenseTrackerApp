@@ -1,5 +1,3 @@
-// 🏠 Beautiful Landing HomeScreen.js for Expense Tracker
-
 import React from 'react';
 import {
   View,
