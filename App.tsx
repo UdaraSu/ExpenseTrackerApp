@@ -10,14 +10,17 @@ import {
 import AddExpenseScreen from './src/screens/AddExpenseScreen';
 import ExpenseListScreen from './src/screens/ExpenseListScreen';
 import ChartScreen from './src/screens/ChartScreen';
+import HomeScreen from './src/screens/HomeScreen';
 import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 
 const ScreenSwitcher = () => {
-  const [screen, setScreen] = useState('add');
+  const [screen, setScreen] = useState('home');
   const { toggleTheme, dark, colors } = useTheme();
 
   const renderScreen = () => {
     switch (screen) {
+      case 'home':
+        return <HomeScreen navigation={{ navigate: setScreen }} />;
       case 'add':
         return <AddExpenseScreen />;
       case 'list':
@@ -31,43 +34,57 @@ const ScreenSwitcher = () => {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background, marginTop: 40 }]}>
-      <View style={[styles.header, { backgroundColor: colors.card }]}>
-        {['chart', 'list', 'add'].map((item) => (
+      {screen !== 'home' && (
+        <View style={[styles.header, { backgroundColor: colors.card }]}>
+          {/* Back Button */}
           <TouchableOpacity
-            key={item}
-            style={[
-              styles.tabButton,
-              {
-                backgroundColor: screen === item ? colors.primary : colors.input,
-                borderColor: screen === item ? colors.primary : 'transparent',
-              },
-            ]}
-            onPress={() => setScreen(item)}
+            style={styles.backButton}
+            onPress={() => setScreen('home')}
+          >
+            <Text style={[styles.backIcon, { color: colors.text }]}>←</Text>
+          </TouchableOpacity>
+
+          {/* Tabs */}
+          {['add', 'list', 'chart'].map((item) => (
+            <TouchableOpacity
+              key={item}
+              style={[
+                styles.tabButton,
+                {
+                  backgroundColor: screen === item ? colors.primary : colors.input,
+                  borderColor: screen === item ? colors.primary : 'transparent',
+                },
+              ]}
+              onPress={() => setScreen(item)}
+              activeOpacity={0.7}
+            >
+              <Text
+                style={[
+                  styles.tabButtonText,
+                  { color: screen === item ? '#1569BD' : colors.text },
+                ]}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </Text>
+            </TouchableOpacity>
+          ))}
+
+          {/* Theme Toggle */}
+          <TouchableOpacity
+            style={[styles.themeButton, { backgroundColor: colors.primary }]}
+            onPress={toggleTheme}
             activeOpacity={0.7}
           >
-            <Text
-              style={[
-                styles.tabButtonText,
-                { color: screen === item ? '#1569BD' : colors.text },
-              ]}
-            >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
+            <Text style={styles.themeButtonText}>
+              {dark ? '☀️ Light' : '🌙 Dark'}
             </Text>
           </TouchableOpacity>
-        ))}
+        </View>
+      )}
 
-        <TouchableOpacity
-          style={[styles.themeButton, { backgroundColor: colors.primary }]}
-          onPress={toggleTheme}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.themeButtonText}>
-            {dark ? '☀️ Light' : '🌙 Dark'}
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>{renderScreen()}</ScrollView>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        {renderScreen()}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -78,6 +95,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-around',
     paddingVertical: 14,
     paddingHorizontal: 10,
@@ -87,6 +105,15 @@ const styles = StyleSheet.create({
     elevation: 8,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+  },
+  backButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    marginRight: 6,
+  },
+  backIcon: {
+    fontSize: 22,
+    fontWeight: 'bold',
   },
   tabButton: {
     paddingVertical: 10,
@@ -107,7 +134,7 @@ const styles = StyleSheet.create({
     minWidth: 90,
   },
   themeButtonText: {
-    color: '#fff',
+    color: '#1569BD',
     fontWeight: '700',
     fontSize: 16,
   },
