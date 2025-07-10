@@ -1,8 +1,6 @@
 # 📱 ExpenseMate - Personal Expense Tracker
 
-**ExpenseMate** is a mobile app built with React Native that helps you manage your daily spending. With a clean and intuitive UI, it allows users to add, view, and analyze their expenses all in single place.
-
---
+**ExpenseMate** is a mobile app built with React Native that helps you manage your daily spending. With a clean and intuitive UI, it allows users to add, view, and analyze their expenses all in one place.
 
 ## ✨ Features
 
